@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using FitnessHubMobile.Services;
 using Microsoft.Extensions.Logging;
 
 namespace FitnessHubMobile
@@ -22,6 +23,7 @@ namespace FitnessHubMobile
 #endif
 
             builder.Services.AddHttpClient();
+            builder.Services.AddSingleton<IApiService, ApiService>();
 
             return builder.Build();
         }
