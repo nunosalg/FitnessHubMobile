@@ -262,7 +262,7 @@ namespace FitnessHubMobile.Services
                 var json = JsonSerializer.Serialize(register, _serializerOptions);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await PostRequest("api/ClientClasses/RegisterInClass", content);
+                var response = await PostRequest("api/ClientClassesApi/RegisterInClass", content);
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogError($"Error sending HTTP requisition: {response.StatusCode}");
@@ -370,32 +370,32 @@ namespace FitnessHubMobile.Services
 
         public async Task<(IEnumerable<Gym>? Gyms, string? ErrorMessage)> GetGyms()
         {
-            string endpoint = "api/Gyms/GetAllGyms";
+            string endpoint = "api/GymsApi/GetAllGyms";
             return await GetAsync<IEnumerable<Gym>>(endpoint);
         }
 
         public async Task<(IEnumerable<ClassModel>? GymClasses, string? ErrorMessage)> GetClassesByGym(int gymId)
         {
-            string endpoint = "api/Classes/GetClassesByGym";
+            string endpoint = "api/ClassesApi/GetClassesByGym";
             endpoint += $"?gymId={gymId}";
             return await GetAsync<IEnumerable<ClassModel>>(endpoint);
         }
 
         public async Task<(IEnumerable<ClassModel>? OnlineClasses, string? ErrorMessage)> GetOnlineClasses()
         {
-            string endpoint = "api/Classes/GetOnlineClasses";
+            string endpoint = "api/ClassesApi/GetOnlineClasses";
             return await GetAsync<IEnumerable<ClassModel>>(endpoint);
         }
 
         public async Task<(IEnumerable<ClassModel>? ClientClasses, string? ErrorMessage)> GetClientClasses()
         {
-            string endpoint = "api/ClientClasses/MyClasses";
+            string endpoint = "api/ClientClassesApi/MyClasses";
             return await GetAsync<IEnumerable<ClassModel>>(endpoint);
         }
 
         public async Task<(IEnumerable<ClientClassHistory>? ClientClassesHistory, string? ErrorMessage)> GetClientClassesHistory()
         {
-            string endpoint = "api/ClientClasses/MyClassesHistory";
+            string endpoint = "api/ClientClassesApi/MyClassesHistory";
             return await GetAsync<IEnumerable<ClientClassHistory>>(endpoint);
         }
 
@@ -453,6 +453,39 @@ namespace FitnessHubMobile.Services
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
+        }
+
+        public async Task<Response> GetCountriesAsync()
+        {
+            var response = await _httpClient.GetAsync("https://countryinfoapi.com/api/countries");
+            var result = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var countries = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CountryApi>>(result);
+
+                List<CountryApi> countryList = new List<CountryApi>();
+
+                foreach (var country in countries)
+                {
+                    if (!string.IsNullOrEmpty(country.Callingcode) && country.Callingcode.ToLower() != "undefined")
+                    {
+                        countryList.Add(country);
+                    }
+                }
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Results = countryList.OrderBy(c => c.Name).ToList()
+                };
+            }
+
+            return new Response
+            {
+                IsSuccess = false,
+                Message = result
+            };
         }
     }
 }

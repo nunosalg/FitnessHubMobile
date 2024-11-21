@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using FitnessHubMobile.Services;
+using FitnessHubMobile.Validations;
 using Microsoft.Extensions.Logging;
 
 namespace FitnessHubMobile
@@ -16,6 +17,7 @@ namespace FitnessHubMobile
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("fa-solid-900.ttf", "FontAwesome");
                 });
 
 #if DEBUG
@@ -24,6 +26,7 @@ namespace FitnessHubMobile
 
             builder.Services.AddHttpClient();
             builder.Services.AddSingleton<IApiService, ApiService>();
+            builder.Services.AddSingleton<IValidator, Validator>();
 
             return builder.Build();
         }

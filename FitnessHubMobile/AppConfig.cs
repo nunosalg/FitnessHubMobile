@@ -2,7 +2,7 @@
 {
     public class AppConfig
     {
-        public static readonly string BaseUrl = "https://localhost:44370/";
+        public static readonly string BaseUrl = "https://7xf28vx5-44370.uks1.devtunnels.ms/";
         public static readonly string HomePageTitle = "FitnessHub";
 
         public static readonly string DefaultProfileImage = "Resources/Images/defaultavatar.jpg";
