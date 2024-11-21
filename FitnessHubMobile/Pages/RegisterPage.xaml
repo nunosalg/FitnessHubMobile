@@ -62,6 +62,10 @@
                        Keyboard="Numeric"
                        x:Name="EntPhoneNumber" />
 
+                <Picker x:Name="GymsPicker"
+                        Title="Select a gym"
+                        ItemDisplayBinding="{Binding Data}"/>
+
                 <Entry Placeholder="Password"
                    IsPassword="True"
                    x:Name="EntPassword"/>

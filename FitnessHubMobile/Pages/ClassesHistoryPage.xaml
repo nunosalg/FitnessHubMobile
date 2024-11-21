@@ -3,10 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessHubMobile.Pages.ClassesHistoryPage"
              Title="Classes History">
-    <VerticalStackLayout>
-        <Label 
-            Text="Classes history"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <Grid>
+            <Image Source="bg2.png"
+           Aspect="AspectFill"
+           IsVisible="True" />
+            <Grid RowDefinitions="Auto,*"
+          RowSpacing="20"
+          Margin="20,50,20,40">
+
+                <VerticalStackLayout Grid.Row="0"
+                         Spacing="2">
+
+                    <Label Text="History"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   FontSize="Large"
+                   TextColor="{StaticResource White}"/>
+                </VerticalStackLayout>
+
+                <CollectionView x:Name="ClassesHistory"
+                        Grid.Row="1">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                           Margin="0,10"
+                           CornerRadius="10"
+                           BorderColor="LightGray"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                                <StackLayout>
+                                    <Label Text="{Binding ClassType}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf44b;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="3,0"/>
+                                        <Label Text="{Binding Category}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf007;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0,6,0"/>
+                                        <Label Text="{Binding Instructor}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf017;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0"/>
+                                        <Label Text="{Binding DateStart, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf017;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0"/>
+                                        <Label Text="{Binding DateEnd, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf3c5;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="5,0"/>
+                                        <Label Text="{Binding Location}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -60,6 +60,7 @@
                 <Entry Placeholder="Phone number"
                        Keyboard="Telephone"
                        x:Name="EntPhoneNumber" 
+                       FontAttributes="Bold"
                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
             </Frame>
 

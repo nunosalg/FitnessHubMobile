@@ -59,8 +59,6 @@ public partial class LoginPage : ContentPage
 
         LoadingIndicator.IsVisible = false;
         FrameLogin.IsEnabled = true;
-
-        return;
     }
 
     private async void TapRegister_Tapped(object sender, TappedEventArgs e)

@@ -11,4 +11,18 @@ public partial class ClassesHistoryPage : ContentPage
 		InitializeComponent();
         _apiService = apiService;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var (response, errorMessage) = await _apiService.GetClientClassesHistory();
+
+        ClassesHistory.ItemsSource = response;
+
+        if (response == null)
+        {
+            await DisplayAlert("Info", "No history found", "Ok");
+        }
+    }
 }

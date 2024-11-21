@@ -4,7 +4,7 @@ namespace FitnessHubMobile.Services
 {
     public interface IApiService
     {
-        Task<ApiResponse<bool>> Register(string firstName, string lastName, string phoneNumber, string email, DateTime birthDate, string password, string confirmPassword);
+        Task<ApiResponse<bool>> Register(string firstName, string lastName, string phoneNumber, string email, DateTime birthDate, string password, string confirmPassword, int gymId);
 
         Task<ApiResponse<bool>> Login(string email, string password);
 

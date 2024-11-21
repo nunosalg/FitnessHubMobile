@@ -45,8 +45,6 @@ public partial class RecoverPasswordPage : ContentPage
 
         LoadingIndicator.IsVisible = false;
         FrameRecover.IsEnabled = true;
-
-        return;
     }
 
     private async void TapBackToLogin_Tapped(object sender, TappedEventArgs e)

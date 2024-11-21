@@ -82,7 +82,5 @@ public partial class ResetPasswordPage : ContentPage
 
         LoadingIndicator.IsVisible = false;
         FrameReset.IsEnabled = true;
-
-        return;
     }
 }

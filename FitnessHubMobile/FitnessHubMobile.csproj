@@ -60,6 +60,7 @@
 	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	  <None Remove="Resources\Images\about.png" />
 	  <None Remove="Resources\Images\account.png" />
+	  <None Remove="Resources\Images\bg2.png" />
 	  <None Remove="Resources\Images\classes.png" />
 	  <None Remove="Resources\Images\defaultavatar.png" />
 	  <None Remove="Resources\Images\facebook.svg" />

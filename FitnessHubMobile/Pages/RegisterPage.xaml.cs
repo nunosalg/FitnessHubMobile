@@ -1,3 +1,4 @@
+using FitnessHubMobile.Models;
 using FitnessHubMobile.Services;
 using FitnessHubMobile.Validations;
 
@@ -29,9 +30,16 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        _countries = (List<CountryApi>?)response.Results;
+        var (gyms, errorMessage) = await _apiService.GetGyms();
+        if(gyms == null)
+        {
+            await DisplayAlert("Error", "Couldn't load gyms", "Ok");
+            return;
+        }
 
-        CountriesPicker.ItemsSource = _countries;
+        CountriesPicker.ItemsSource = (List<CountryApi>?)response.Results;
+
+        GymsPicker.ItemsSource = (List<Gym>?)gyms;
     }
 
     private async void TapRegister_Tapped(object sender, TappedEventArgs e)
@@ -48,11 +56,17 @@ public partial class RegisterPage : ContentPage
                 errorMessage = "- No country selected";
             }
 
-            var phoneNumber = $"{country?.Callingcode}{EntPhoneNumber}";
-
-            if (await _validator.Validate(EntFirstName.Text, EntLastName.Text, EntEmail.Text, EntPhoneNumber.Text, DateOfBirthPicker.Date, EntPassword.Text, EntConfirmPassword.Text) && !string.IsNullOrEmpty(errorMessage))
+            var gym = GymsPicker.SelectedItem as Gym;
+            if(gym?.Id == null)
             {
-                var response = await _apiService.Register(EntFirstName.Text, EntLastName.Text, phoneNumber, EntEmail.Text, DateOfBirthPicker.Date, EntPassword.Text, EntConfirmPassword.Text);
+                errorMessage += "- No gym selected"; 
+            }
+
+            var phoneNumber = $"{country?.Callingcode}{EntPhoneNumber.Text}";
+
+            if (await _validator.Validate(EntFirstName.Text, EntLastName.Text, EntEmail.Text, EntPhoneNumber.Text, DateOfBirthPicker.Date, EntPassword.Text, EntConfirmPassword.Text) && string.IsNullOrEmpty(errorMessage))
+            {
+                var response = await _apiService.Register(EntFirstName.Text, EntLastName.Text, phoneNumber, EntEmail.Text, DateOfBirthPicker.Date, EntPassword.Text, EntConfirmPassword.Text, gym.Id);
 
                 if (!response.HasError)
                 {

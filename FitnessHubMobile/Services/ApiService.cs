@@ -24,7 +24,7 @@ namespace FitnessHubMobile.Services
             };
         }
 
-        public async Task<ApiResponse<bool>> Register(string firstName, string lastName, string phoneNumber, string email, DateTime birthDate, string password, string confirmPassword)
+        public async Task<ApiResponse<bool>> Register(string firstName, string lastName, string phoneNumber, string email, DateTime birthDate, string password, string confirmPassword, int gymId)
         {
             try
             {
@@ -36,7 +36,8 @@ namespace FitnessHubMobile.Services
                     PhoneNumber = phoneNumber,
                     BirthDate = birthDate,
                     Password = password,
-                    Confirm = confirmPassword
+                    Confirm = confirmPassword,
+                    GymId = gymId
                 };
 
                 var json = JsonSerializer.Serialize(register, _serializerOptions);
@@ -354,16 +355,12 @@ namespace FitnessHubMobile.Services
 
         public async Task<(ProfileImage? ProfileImage, string? ErrorMessage)> GetUserProfileImage()
         {
-            AddAuthorizationHeader();
-
             string endpoint = "api/Clients/UserImage";
             return await GetAsync<ProfileImage>(endpoint);
         }
 
         public async Task<(UserInfo? UserInfo, string? ErrorMessage)> GetUserInfo()
         {
-            AddAuthorizationHeader();
-
             string endpoint = "api/Clients/UserInfo";
             return await GetAsync<UserInfo>(endpoint);
         }
@@ -403,6 +400,8 @@ namespace FitnessHubMobile.Services
         {
             try
             {
+                AddAuthorizationHeader();
+
                 var url = AppConfig.BaseUrl + endpoint;
                 var response = await _httpClient.GetAsync(url);
 
