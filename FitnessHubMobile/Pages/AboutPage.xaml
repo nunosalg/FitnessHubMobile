@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="FitnessHubMobile.Pages.AboutPage"
-             Title="About">
-    <VerticalStackLayout>
-        <Label 
-            Text="About"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="About"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray600}">
+
+    <Grid RowDefinitions="*,Auto">
+        <VerticalStackLayout Grid.Row="0"
+                         Spacing="2" 
+                         VerticalOptions="Center">
+
+            <Image Source="logo.png"
+               Aspect="AspectFit"
+               HeightRequest="100"
+               WidthRequest="200"
+               HorizontalOptions="Center"/>
+
+            <Label Text="&#xA9; Nuno Salgueiro, Mauro Cunha, Diogo Sanlez"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+                   TextColor="{StaticResource White}"/>
+            <Label Text="25/11/2024"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               TextColor="{StaticResource White}"/>
+            <Label Text="1.0.0"
+                HorizontalOptions="Center"
+                FontAttributes="Bold"
+                TextColor="{StaticResource White}"/>
+
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="1"
+                           Spacing="20"
+                           Margin="0,10"
+                           HorizontalOptions="Center"
+                           VerticalOptions="EndAndExpand">
+
+            <ImageButton Source="facebook.svg"
+                     HeightRequest="30"
+                     WidthRequest="30"
+                     x:Name="ImgBtnFacebook"
+                     Clicked="ImgBtnFacebook_Clicked">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <ImageButton Source="xtwitter.svg"
+                     HeightRequest="30"
+                     WidthRequest="30"
+                     x:Name="ImgBtnX"
+                     Clicked="ImgBtnX_Clicked">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <ImageButton Source="instagram.svg"
+                     HeightRequest="30"
+                     WidthRequest="30"
+                     x:Name="ImgBtnInstagram"
+                     Clicked="ImgBtnInstagram_Clicked">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+        </HorizontalStackLayout>
+    </Grid>
 </ContentPage>

@@ -62,10 +62,13 @@
 	  <None Remove="Resources\Images\account.png" />
 	  <None Remove="Resources\Images\classes.png" />
 	  <None Remove="Resources\Images\defaultavatar.png" />
+	  <None Remove="Resources\Images\facebook.svg" />
 	  <None Remove="Resources\Images\history.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\instagram.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\noimage.png" />
+	  <None Remove="Resources\Images\xtwitter.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -2,11 +2,147 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessHubMobile.Pages.AccountPage"
-             Title="Account">
-    <VerticalStackLayout>
-        <Label 
-            Text="Account"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Account"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource Gray600}">
+
+    <Grid RowDefinitions="Auto,5*,Auto" 
+      RowSpacing="0">
+
+        <VerticalStackLayout Grid.Row="0"
+                         VerticalOptions="Start"
+                         Spacing="1"
+                         Padding="20">
+
+            <ImageButton Source="defaultavatar.png"
+                     HeightRequest="120"
+                     WidthRequest="120"
+                     Aspect="AspectFill"
+                     CornerRadius="30"
+                     HorizontalOptions="Center" 
+                     x:Name="ImgBtnProfile"
+                     Clicked="ImgBtnProfile_Clicked"/>
+
+            <Label x:Name="LblEmail"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               TextColor="{StaticResource White}"/>
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                         Margin="20"
+                         Spacing="10">
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="First Name"
+                   x:Name="EntFirstName"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                   FontAttributes="Bold"/>
+            </Frame>
+
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="Last Name"
+                   x:Name="EntLastName"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                   FontAttributes="Bold"/>
+            </Frame>
+
+            <Frame CornerRadius="10" Padding="0">
+                <DatePicker x:Name="DateOfBirthPicker"
+                        Format="D" 
+                        MinimumDate="1900-01-01"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
+            </Frame>
+
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="Phone number"
+                       Keyboard="Telephone"
+                       x:Name="EntPhoneNumber" 
+                       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"/>
+            </Frame>
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Label Text="&#xf007;"
+                   FontFamily="FontAwesome"
+                   VerticalOptions="Center"
+                   Margin="5,0"
+                   TextColor="{StaticResource White}"/>
+                <Label Text="Update Info"
+                   FontAttributes="Bold"
+                   FontSize="Small"
+                   TextColor="{StaticResource White}"/>
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapChangeInfo" Tapped="TapChangeInfo_Tapped" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+            <Border HeightRequest="1" BackgroundColor="Gray" Margin="5,0"/>
+
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="Current password"
+                   IsPassword="True"
+                   x:Name="EntCurrentPassword"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                   FontAttributes="Bold"/>
+            </Frame>
+
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="New password"
+                   IsPassword="True"
+                   x:Name="EntNewPassword"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                   FontAttributes="Bold"/>
+            </Frame>
+
+            <Frame CornerRadius="10" Padding="0">
+                <Entry Placeholder="Confirm password"
+                   IsPassword="True"
+                   x:Name="EntConfirmPassword"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                   FontAttributes="Bold"/>
+            </Frame>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="&#xf084;"
+                   FontFamily="FontAwesome"
+                   VerticalOptions="Center"
+                   Margin="5,0"
+                   TextColor="{StaticResource White}"/>
+                <Label Text="Change Password"
+                   FontAttributes="Bold"
+                   FontSize="Small"
+                   TextColor="{StaticResource White}"/>
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapChangePassword" Tapped="TapChangePassword_Tapped" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+            <Border HeightRequest="1" BackgroundColor="Gray" Margin="5,0"/>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="&#xf2f5;"
+                   FontFamily="FontAwesome"
+                   VerticalOptions="Center"
+                   Margin="5,0"
+                   TextColor="{StaticResource White}"/>
+                <Label Text="Logout"
+                   FontAttributes="Bold"
+                   FontSize="Small"
+                   TextColor="{StaticResource White}"/>
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapLogout" Tapped="TapLogout_Tapped" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <ActivityIndicator Grid.Row="2" 
+       x:Name="LoadingIndicator"
+       HorizontalOptions="Center"
+       IsVisible="False" 
+       IsRunning="{Binding IsVisible, Source={x:Reference LoadingIndicator}}" />
+
+    </Grid>
 </ContentPage>
