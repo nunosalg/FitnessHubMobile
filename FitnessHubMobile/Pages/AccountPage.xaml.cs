@@ -258,6 +258,8 @@ public partial class AccountPage : ContentPage
     private void TapLogout_Tapped(object sender, TappedEventArgs e)
     {
         Preferences.Set("accesstoken", string.Empty);
+        Preferences.Set("gymid", string.Empty);
+
         Application.Current!.MainPage = new NavigationPage(new LoginPage(_apiService, _validator));
     }
 
@@ -265,5 +267,10 @@ public partial class AccountPage : ContentPage
     {
         _loginPageDisplayed = true;
         await Navigation.PushAsync(new LoginPage(_apiService, _validator));
+    }
+
+    private async void TapAbout_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new AboutPage(_apiService, _validator));
     }
 }

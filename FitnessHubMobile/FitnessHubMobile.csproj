@@ -69,6 +69,7 @@
 	  <None Remove="Resources\Images\instagram.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\noimage.png" />
+	  <None Remove="Resources\Images\workout.png" />
 	  <None Remove="Resources\Images\xtwitter.svg" />
 	</ItemGroup>
 
@@ -100,7 +101,13 @@
 	  <MauiXaml Update="Pages\MyClassesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\MyWorkoutsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\RecoverPasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\RegisterInClassPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RegisterPage.xaml">

@@ -8,7 +8,6 @@ public partial class RegisterPage : ContentPage
 {
     private readonly IApiService _apiService;
     private readonly IValidator _validator;
-    private List<CountryApi>? _countries = new List<CountryApi>();
 
     public RegisterPage(IApiService apiService, IValidator validator)
 	{

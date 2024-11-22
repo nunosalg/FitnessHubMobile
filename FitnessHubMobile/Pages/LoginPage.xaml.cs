@@ -50,6 +50,10 @@ public partial class LoginPage : ContentPage
 
         if (!response.HasError)
         {
+            var result = await _apiService.GetUserInfo();
+
+            Preferences.Set("gymid", result.UserInfo!.GymId);
+
             Application.Current!.MainPage = new AppShell(_apiService, _validator);
         }
         else

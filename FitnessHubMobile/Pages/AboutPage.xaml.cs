@@ -1,11 +1,19 @@
+using FitnessHubMobile.Services;
+using FitnessHubMobile.Validations;
+
 namespace FitnessHubMobile.Pages;
 
 public partial class AboutPage : ContentPage
 {
-	public AboutPage()
+    private readonly IApiService _apiService;
+    private readonly IValidator _validator;
+
+    public AboutPage(IApiService apiService, IValidator validator)
 	{
 		InitializeComponent();
-	}
+        _apiService = apiService;
+        _validator = validator;
+    }
 
     private async void ImgBtnInstagram_Clicked(object sender, EventArgs e)
     {
@@ -47,5 +55,10 @@ public partial class AboutPage : ContentPage
         {
             await DisplayAlert("Error", "Unable to open X page", "Ok");
         }
+    }
+
+    private async void TapBackAccount_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new AccountPage(_apiService, _validator));
     }
 }

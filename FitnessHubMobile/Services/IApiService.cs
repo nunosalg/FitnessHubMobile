@@ -34,6 +34,8 @@ namespace FitnessHubMobile.Services
 
         Task<(IEnumerable<ClientClassHistory>? ClientClassesHistory, string? ErrorMessage)> GetClientClassesHistory();
 
+        Task<(IEnumerable<Workout>? ClientWorkouts, string? ErrorMessage)> GetClientWorkouts();
+
         Task<Response> GetCountriesAsync();
     }
 }

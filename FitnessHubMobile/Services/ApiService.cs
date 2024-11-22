@@ -396,6 +396,12 @@ namespace FitnessHubMobile.Services
             return await GetAsync<IEnumerable<ClientClassHistory>>(endpoint);
         }
 
+        public async Task<(IEnumerable<Workout>? ClientWorkouts, string? ErrorMessage)> GetClientWorkouts()
+        {
+            string endpoint = "api/Clients/GetWorkouts";
+            return await GetAsync<IEnumerable<Workout>>(endpoint);
+        }
+
         private async Task<(T? Data, string? ErrorMessage)> GetAsync<T>(string endpoint)
         {
             try

@@ -6,81 +6,82 @@
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource Gray600}">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*"
-      RowSpacing="20"
-      Margin="20,150,20,10"
->
-        <Image Grid.Row="0"
-           Source="logo.png"
-           Aspect="AspectFit"
-           HeightRequest="100"
-           WidthRequest="200" />
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*"
+          RowSpacing="20"
+          Margin="20,150,20,10">
+            <Image Grid.Row="0"
+               Source="logo.png"
+               Aspect="AspectFit"
+               HeightRequest="100"
+               WidthRequest="200" />
 
-        <Label Grid.Row="1"
-           Text="Login"
-           FontAttributes="Bold"
-           HorizontalOptions="Center"
-           TextColor="{StaticResource White}"/>
-
-        <Frame Grid.Row="2"
-           Padding="15"
-           BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-
-            <VerticalStackLayout>
-
-                <Entry Placeholder="Email"
-                   x:Name="EntEmail" />
-
-                <Entry Placeholder="Password"
-                   IsPassword="True"
-                   x:Name="EntPassword" />
-            </VerticalStackLayout>
-        </Frame>
-
-        <Frame Grid.Row="3"
-           x:Name="FrameLogin"
-           Padding="0"
-           CornerRadius="10"
-           BackgroundColor="{StaticResource FitnessHub}"
-           BorderColor="Transparent">
-            <HorizontalStackLayout Spacing="5" Padding="10" HorizontalOptions="Center">
-                <Label Text="&#xf2f6;"
-                   FontFamily="FontAwesome"
-                   VerticalOptions="Center" 
-                   TextColor="{StaticResource Black}"/>
-                <Label Text="Login" VerticalOptions="Center" TextColor="{StaticResource Black}"/>
-            </HorizontalStackLayout>
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer x:Name="TapLogin" Tapped="TapLogin_Tapped"/>
-            </Frame.GestureRecognizers>
-        </Frame>
-
-        <Label Grid.Row="4"
-           Text="Forgot your password ? " 
-           HorizontalOptions="Center"
-           TextColor="{StaticResource White}">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer x:Name="TapForgotPassword" Tapped="TapForgotPassword_Tapped"/>
-            </Label.GestureRecognizers>
-        </Label>
-
-        <ActivityIndicator Grid.Row="5" 
-               x:Name="LoadingIndicator"
+            <Label Grid.Row="1"
+               Text="Login"
+               FontAttributes="Bold"
                HorizontalOptions="Center"
-               IsVisible="False" 
-               IsRunning="{Binding IsVisible, Source={x:Reference LoadingIndicator}}" />
+               TextColor="{StaticResource White}"/>
 
-        <HorizontalStackLayout Grid.Row="6"
-                           Spacing="2"
-                           HorizontalOptions="Center"
-                           VerticalOptions="EndAndExpand"
-                           Margin="0,10">
-            <Label Text="Don't have an account ? " TextColor="{StaticResource White}"/>
-            <Label Text="Register here" TextColor="{StaticResource FitnessHub}" FontAttributes="Bold">
+            <Frame Grid.Row="2"
+               Padding="15"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+
+                <VerticalStackLayout>
+
+                    <Entry Placeholder="Email"
+                       x:Name="EntEmail" />
+
+                    <Entry Placeholder="Password"
+                       IsPassword="True"
+                       x:Name="EntPassword" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Grid.Row="3"
+               x:Name="FrameLogin"
+               Padding="0"
+               CornerRadius="10"
+               BackgroundColor="{StaticResource FitnessHub}"
+               BorderColor="Transparent">
+                <HorizontalStackLayout Spacing="5" Padding="10" HorizontalOptions="Center">
+                    <Label Text="&#xf2f6;"
+                       FontFamily="FontAwesome"
+                       VerticalOptions="Center" 
+                       TextColor="{StaticResource Black}"/>
+                    <Label Text="Login" VerticalOptions="Center" TextColor="{StaticResource Black}"/>
+                </HorizontalStackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapLogin" Tapped="TapLogin_Tapped"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Label Grid.Row="4"
+               Text="Forgot your password ? " 
+               HorizontalOptions="Center"
+               TextColor="{StaticResource White}">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="TapRegister" Tapped="TapRegister_Tapped"/>
+                    <TapGestureRecognizer x:Name="TapForgotPassword" Tapped="TapForgotPassword_Tapped"/>
                 </Label.GestureRecognizers>
             </Label>
-        </HorizontalStackLayout>
-    </Grid>
+
+            <ActivityIndicator Grid.Row="5" 
+                   x:Name="LoadingIndicator"
+                   HorizontalOptions="Center"
+                   IsVisible="False" 
+                   IsRunning="{Binding IsVisible, Source={x:Reference LoadingIndicator}}" />
+
+            <HorizontalStackLayout Grid.Row="6"
+                               Spacing="2"
+                               HorizontalOptions="Center"
+                               VerticalOptions="EndAndExpand"
+                               Margin="0,10">
+                <Label Text="Don't have an account ? " TextColor="{StaticResource White}"/>
+                <Label Text="Register here" TextColor="{StaticResource FitnessHub}" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapRegister" Tapped="TapRegister_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

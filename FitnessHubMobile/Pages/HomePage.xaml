@@ -3,10 +3,143 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FitnessHubMobile.Pages.HomePage"
              Title="HomePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Homepage"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <Grid>
+            <Image Source="bg2.png"
+                   Aspect="AspectFill"
+                   IsVisible="True" />
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+                  RowSpacing="20"
+                  Margin="20,50,20,40">
+
+                <VerticalStackLayout Grid.Row="0"
+                                     Spacing="2">
+
+                    <Label Text="The worldwide gym"
+                           FontAttributes="Bold"
+                           FontSize="30"
+                           TextColor="{StaticResource White}"/>
+                    <Label Text="Best gym academies in the world!"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource White}"/>
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="1"
+                     Margin="0,40">
+
+                    <VerticalStackLayout>
+                        <Label Text="Search Classes"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               TextColor="{StaticResource White}"/>
+
+                        <Border Padding="0" Margin="0,11">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+                            <Picker x:Name="CategoryPicker"
+                                    Title="Category"
+                                    FontAttributes="Bold"/>
+                        </Border>
+
+                        <HorizontalStackLayout>
+                            <Label Text="Search by date"
+                                   FontAttributes="Bold"
+                                   Margin="5,11"
+                                   TextColor="{StaticResource White}"/>
+                            <CheckBox x:Name="dateCheckbox" IsChecked="True"/>
+                        </HorizontalStackLayout>
+                        <Border Padding="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+                            <DatePicker x:Name="datePicker" FontAttributes="Bold"/>
+                        </Border>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <Frame Grid.Row="2"
+                       x:Name="FrameSearch"
+                       Padding="0"
+                       CornerRadius="10"
+                       BackgroundColor="{StaticResource FitnessHub}"
+                       BorderColor="Transparent">
+                    <HorizontalStackLayout Spacing="5" Padding="10" HorizontalOptions="Center">
+                        <Label Text="&#xf002;"
+                       FontFamily="FontAwesome"
+                       VerticalOptions="Center" />
+                        <Label Text="Search"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapSearch" Tapped="TapSearch_Tapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <ActivityIndicator Grid.Row="3" 
+                                    x:Name="LoadingIndicator"
+                                    HorizontalOptions="Center"
+                                    IsVisible="False" 
+                                    IsRunning="{Binding IsVisible, Source={x:Reference LoadingIndicator}}" />
+
+                <CollectionView x:Name="ClassesSearchResult"
+                        Grid.Row="4">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="10"
+                                Margin="0,10">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <StackLayout>
+                                    <Label Text="{Binding ClassType}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf44b;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="3,0"/>
+                                        <Label Text="{Binding Category}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf007;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0,6,0"/>
+                                        <Label Text="{Binding Instructor}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf017;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0"/>
+                                        <Label Text="{Binding DateStart, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf017;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="4,0"/>
+                                        <Label Text="{Binding DateEnd, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="&#xf3c5;" FontFamily="FontAwesome" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" Margin="5,0"/>
+                                        <Label Text="{Binding Location}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    </HorizontalStackLayout>
+
+                                    <Frame Padding="0"
+                                           Margin="0,5,0,0"
+                                           CornerRadius="10"
+                                           BackgroundColor="{StaticResource FitnessHub}"
+                                           BorderColor="Transparent">
+                                        <HorizontalStackLayout Spacing="5" Padding="10" HorizontalOptions="Center">
+                                            <Label Text="&#xf00c;"
+                                           FontFamily="FontAwesome"
+                                           VerticalOptions="Center" />
+                                            <Label Text="Register"/>
+                                        </HorizontalStackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="TapRegisterInClass" 
+                                                          Tapped="TapRegisterInClass_Tapped"
+                                                          CommandParameter="{Binding Id}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

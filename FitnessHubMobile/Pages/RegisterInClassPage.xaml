@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessHubMobile.Pages.RegisterInClassPage"
+             Title="Register In Class">
+
+    <ScrollView>
+        <Grid>
+            <Image Source="bg2.png"
+               Aspect="AspectFill"
+               IsVisible="True" />
+            
+            <Grid RowDefinitions="Auto,Auto,Auto,*"
+              RowSpacing="20"
+              Margin="20,50,20,10">
+
+                <VerticalStackLayout Grid.Row="0"
+                                 Spacing="2">
+
+                    <Label Text="The worldwide gym"
+                       FontAttributes="Bold"
+                       FontSize="30"
+                       TextColor="{StaticResource White}"/>
+                    <Label Text="Best gym academies in the world!"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource White}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Row="1"
+                    Margin="0,40"
+                    Spacing="10">
+                    <Label x:Name="LblClassType"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource White}"/>
+                    <Frame CornerRadius="10" Padding="0">
+                        <Entry x:Name="EntCategory"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                               FontAttributes="Bold"
+                               IsEnabled="False"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10" Padding="0">
+                        <Entry x:Name="EntInstructor"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                               FontAttributes="Bold"
+                               IsEnabled="False"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10" Padding="0">
+                        <Entry x:Name="EntDateStart"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                               FontAttributes="Bold"
+                               IsEnabled="False"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10" Padding="0">
+                        <Entry x:Name="EntDateEnd"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                               FontAttributes="Bold"
+                               IsEnabled="False"/>
+                    </Frame>
+
+                    <Frame CornerRadius="10" Padding="0">
+                        <Entry x:Name="EntLocation"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                               FontAttributes="Bold"
+                               IsEnabled="False"/>
+                    </Frame>
+
+                    <Frame x:Name="FrameRegisterInClass"
+                            Padding="0"
+                            CornerRadius="10"
+                            BackgroundColor="{StaticResource FitnessHub}"
+                            BorderColor="Transparent">
+                        <HorizontalStackLayout Spacing="5" Padding="10" HorizontalOptions="Center">
+                            <Label Text="&#xf00c;"
+                                    FontFamily="FontAwesome"
+                                    VerticalOptions="Center" />
+                            <Label Text="Register"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="TapRegisterInClass" Tapped="TapRegisterInClass_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <ActivityIndicator Grid.Row="2" 
+                                    x:Name="LoadingIndicator"
+                                    HorizontalOptions="Center"
+                                    IsVisible="False" 
+                                    IsRunning="{Binding IsVisible, Source={x:Reference LoadingIndicator}}" />
+
+                <HorizontalStackLayout Grid.Row="3"
+                                        Spacing="2" 
+                                        HorizontalOptions="Center"                      
+                                        VerticalOptions="EndAndExpand">
+
+                    <Label Text="&#xf015;" FontFamily="FontAwesome" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="Go back" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Medium">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="TapBackHomepage" Tapped="TapBackHomepage_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+                
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

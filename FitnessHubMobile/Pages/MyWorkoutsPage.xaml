@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessHubMobile.Pages.MyWorkoutsPage"
+             Title="My Workouts">
+
+    <ScrollView>
+        <Grid>
+            <Image Source="bg2.png"
+                    Aspect="AspectFill"
+                    IsVisible="True" />
+            <Grid RowDefinitions="Auto,*"
+                   RowSpacing="20"
+                   Margin="20,50,20,40">
+
+                <VerticalStackLayout Grid.Row="0"
+                          Spacing="2">
+
+                    <Label Text="Workouts"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    TextColor="{StaticResource White}"/>
+                </VerticalStackLayout>
+
+                <CollectionView x:Name="ClientWorkouts"
+                         Grid.Row="1">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                                    Margin="0,10"
+                                    CornerRadius="10"
+                                    BorderColor="LightGray"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                                <StackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding InstructorName, StringFormat='{0} - '}" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                        <Label Text="{Binding Date, StringFormat=' {0:dd/MM/yyyy HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                    </HorizontalStackLayout>
+                                    <CollectionView ItemsSource="{Binding ExerciseList}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="10">
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="{Binding ExerciseName}" 
+                                                                FontSize="Medium" 
+                                                                FontAttributes="Bold" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Exercise: " FontSize="Small"/>
+                                                        <Label Text="{Binding MachineName}" 
+                                                                FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Duration: " FontSize="Small"/>
+                                                        <Label Text="{Binding Time}" 
+                                                                FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Repetitions: " FontSize="Small"/>
+                                                        <Label Text="{Binding Repetitions}" 
+                                                                FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Sets: " FontSize="Small"/>
+                                                        <Label Text="{Binding Sets}" 
+                                                               FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Day: " FontSize="Small"/>
+                                                        <Label Text="{Binding DayOfWeek}" 
+                                                               FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="Notes: " FontSize="Small"/>
+                                                        <Label Text="{Binding Notes}" 
+                                                               FontSize="Small" />
+                                                    </HorizontalStackLayout>
+
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

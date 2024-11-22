@@ -15,5 +15,7 @@
         public DateTime DateEnd { get; set; }
 
         public string? Location { get; set; }
+
+        public bool IsOnline { get; set; }
     }
 }
