@@ -22,42 +22,49 @@ public partial class HomePage : ContentPage
 
         datePicker.MinimumDate = DateTime.Today;
 
+        var classes = new List<ClassModel>();
+
         var (onlineClasses, errorMessage2) = await _apiService.GetOnlineClasses();
-        if (onlineClasses == null)
+        if (onlineClasses != null)
         {
-            await DisplayAlert("Error", errorMessage2 ?? "Couldn't load online classes", "Ok");
+            classes.AddRange(onlineClasses);
         }
 
         var gymId = Preferences.Get("gymid", 1);
 
         var (gymClasses, errorMessage3) = await _apiService.GetClassesByGym(gymId);
-        if (gymClasses == null)
+        if (gymClasses != null)
         {
-            await DisplayAlert("Error", errorMessage3 ?? "Couldn't load gym classes", "Ok");
+            classes.AddRange(gymClasses);
         }
 
-        var classes = new List<ClassModel>();
-        classes.AddRange(onlineClasses);
-        classes.AddRange(gymClasses);
+        if (classes != null)
+        {
+            _classes = classes;
 
-        _classes = classes;
+            var distinctCategories = classes
+                                .Select(c => c.Category)
+                                .Distinct()
+                                .OrderBy(c => c)
+                                .ToList();
 
-        var distinctCategories = classes
-                            .Select(c => c.Category) 
-                            .Distinct()             
-                            .OrderBy(c => c)        
-                            .ToList();
-
-        CategoryPicker.ItemsSource = distinctCategories;
+            CategoryPicker.ItemsSource = distinctCategories;
+        }
 
         var response = await _apiService.GetClientClasses();
-        _clientClasses = response.ClientClasses.ToList();
+        if(response.ClientClasses != null)
+        {
+            _clientClasses = response.ClientClasses.ToList();
+        }
 
-        var unregisteredGymClasses = gymClasses
+        if (_clientClasses != null)
+        {
+            var unregisteredGymClasses = gymClasses
                                     .Where(searchedClass => !_clientClasses.Any(clientClass => clientClass.Id == searchedClass.Id))
                                     .ToList();
 
-        ClassesSearchResult.ItemsSource = unregisteredGymClasses;
+            ClassesSearchResult.ItemsSource = unregisteredGymClasses;
+        }
     }
 
     private async void TapSearch_Tapped(object sender, TappedEventArgs e)

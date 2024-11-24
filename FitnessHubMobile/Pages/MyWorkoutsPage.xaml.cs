@@ -18,11 +18,13 @@ public partial class MyWorkoutsPage : ContentPage
 
         var (response, errorMessage) = await _apiService.GetClientWorkouts();
 
-        ClientWorkouts.ItemsSource = response;
-
-        if (response == null)
+        if (response != null && response.Any())
         {
-            await DisplayAlert("Info", "Client has no workouts", "Ok");
+            ClientWorkouts.ItemsSource = response;
+        }
+        else
+        {
+            await DisplayAlert("Info", "You have no workouts", "Ok");
         }
     }
 }

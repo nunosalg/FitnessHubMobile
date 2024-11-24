@@ -18,11 +18,13 @@ public partial class ClassesHistoryPage : ContentPage
 
         var (response, errorMessage) = await _apiService.GetClientClassesHistory();
 
-        ClassesHistory.ItemsSource = response;
-
-        if (response == null)
+        if (response != null)
         {
-            await DisplayAlert("Info", "No history found", "Ok");
+            ClassesHistory.ItemsSource = response;
+        }
+        else
+        {
+            await DisplayAlert("Info", "No classes history found", "Ok");
         }
     }
 }

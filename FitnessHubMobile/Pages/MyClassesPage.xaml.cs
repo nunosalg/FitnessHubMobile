@@ -18,11 +18,13 @@ public partial class MyClassesPage : ContentPage
 
         var (response, errorMessage) = await _apiService.GetClientClasses();
 
-        ClientClasses.ItemsSource = response;
-
-        if (response == null)
+        if (response != null)
         {
-            await DisplayAlert("Info", "Client not registered in any classes", "Ok");
+            ClientClasses.ItemsSource = response;
+        }
+        else
+        {
+            await DisplayAlert("Info", "Not registered in any classes", "Ok");
         }
     }
 }
