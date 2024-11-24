@@ -30,7 +30,7 @@ namespace FitnessHubMobile.Services
 
         Task<(IEnumerable<ClassModel>? OnlineClasses, string? ErrorMessage)> GetOnlineClasses();
 
-        Task<(IEnumerable<ClassModel>? ClientClasses, string? ErrorMessage)> GetClientClasses();
+        Task<(IQueryable<ClassModel>? ClientClasses, string? ErrorMessage)> GetClientClasses();
 
         Task<(IEnumerable<ClientClassHistory>? ClientClassesHistory, string? ErrorMessage)> GetClientClassesHistory();
 

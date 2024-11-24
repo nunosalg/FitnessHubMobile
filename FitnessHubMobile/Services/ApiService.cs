@@ -384,10 +384,10 @@ namespace FitnessHubMobile.Services
             return await GetAsync<IEnumerable<ClassModel>>(endpoint);
         }
 
-        public async Task<(IEnumerable<ClassModel>? ClientClasses, string? ErrorMessage)> GetClientClasses()
+        public async Task<(IQueryable<ClassModel>? ClientClasses, string? ErrorMessage)> GetClientClasses()
         {
             string endpoint = "api/ClientClassesApi/MyClasses";
-            return await GetAsync<IEnumerable<ClassModel>>(endpoint);
+            return await GetAsync<IQueryable<ClassModel>>(endpoint);
         }
 
         public async Task<(IEnumerable<ClientClassHistory>? ClientClassesHistory, string? ErrorMessage)> GetClientClassesHistory()

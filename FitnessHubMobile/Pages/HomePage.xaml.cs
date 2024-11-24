@@ -23,11 +23,22 @@ public partial class HomePage : ContentPage
         datePicker.MinimumDate = DateTime.Today;
 
         var classes = new List<ClassModel>();
+        var unregisteredGymClasses = new List<ClassModel>();
+
+        var response = await _apiService.GetClientClasses();
+        if (response.ClientClasses != null)
+        {
+            _clientClasses = response.ClientClasses.ToList();
+        }
 
         var (onlineClasses, errorMessage2) = await _apiService.GetOnlineClasses();
         if (onlineClasses != null)
         {
             classes.AddRange(onlineClasses);
+
+            unregisteredGymClasses = onlineClasses
+                                    .Where(searchedClass => !_clientClasses.Any(clientClass => clientClass.Id == searchedClass.Id))
+                                    .ToList();
         }
 
         var gymId = Preferences.Get("gymid", 1);
@@ -36,6 +47,10 @@ public partial class HomePage : ContentPage
         if (gymClasses != null)
         {
             classes.AddRange(gymClasses);
+
+            unregisteredGymClasses.AddRange(gymClasses
+                                    .Where(searchedClass => !_clientClasses.Any(clientClass => clientClass.Id == searchedClass.Id))
+                                    .ToList());
         }
 
         if (classes != null)
@@ -51,20 +66,7 @@ public partial class HomePage : ContentPage
             CategoryPicker.ItemsSource = distinctCategories;
         }
 
-        var response = await _apiService.GetClientClasses();
-        if(response.ClientClasses != null)
-        {
-            _clientClasses = response.ClientClasses.ToList();
-        }
-
-        if (_clientClasses != null)
-        {
-            var unregisteredGymClasses = gymClasses
-                                    .Where(searchedClass => !_clientClasses.Any(clientClass => clientClass.Id == searchedClass.Id))
-                                    .ToList();
-
-            ClassesSearchResult.ItemsSource = unregisteredGymClasses;
-        }
+        ClassesSearchResult.ItemsSource = unregisteredGymClasses;
     }
 
     private async void TapSearch_Tapped(object sender, TappedEventArgs e)
